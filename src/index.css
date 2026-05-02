@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  :root {
+    /* The Bright Editorial Gallery Vibe */
+    --background: #F7F5F0; /* Soft Gallery Paper / Oat */
+    --surface: #FFFFFF;    /* Pure White for floating elements */
+    --primary: #E64833;    /* Burnt Tangerine - A highly creative, unique pop of color */
+    --accent: #E1DFD8;     /* Slightly darker paper for borders/dividers */
+    --text: #121212;       /* Near Black for maximum crispness */
+
+    /* Change these based on which "crazy" font you like best! */
+    --font-heading: 'Italiana', serif; /* OR 'Cinzel Decorative', OR 'Gloock' */
+    --font-primary: 'Outfit', sans-serif; /* Ultra-clean modern sans for the UI */
+  }
+
+  body {
+    @apply bg-background text-text font-sans antialiased overflow-x-hidden;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Lenis Recommended CSS for Smooth Scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--drift, 0px)), min(88vh, 520px)) rotate(var(--rot, 360deg))
+      scale(0.2);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@keyframes support-glow-bright {
+  0%, 100% { 
+    text-shadow: 0 0 2px rgba(204, 255, 0, 0);
+    color: rgba(255, 255, 255, 0.4);
+  }
+  50% { 
+    text-shadow: 0 0 12px rgba(204, 255, 0, 0.8), 0 0 20px rgba(204, 255, 0, 0.4);
+    color: rgba(204, 255, 0, 0.9); /* Shifts slightly toward lime during the pulse */
+  }
+}
+
+.animate-glow-intense {
+  animation: support-glow-bright 2.5s ease-in-out infinite;
+}
